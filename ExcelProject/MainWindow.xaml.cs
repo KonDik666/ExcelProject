@@ -78,7 +78,7 @@ namespace ExcelProject
                     sumRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
                     worksheet.Cells[5][startRowIndex].Formula = $"=SUM(E{startRowIndex - groupCategory.Count()}:" + $"E{startRowIndex - 1})";
                     sumRange.Font.Bold = worksheet.Cells[5][startRowIndex].Font.Bold = true;
-                    //worksheet.Cells[5][startRowIndex].NumberFormat = "#,###.00";
+                    //worksheet.Cells[5][startRowIndex].NumberFormat = "#,###.00";  
 
                     startRowIndex++;
                     Excel.Range rangeBorders = worksheet.Range[worksheet.Cells[1][1], worksheet.Cells[5][startRowIndex - 1]];
