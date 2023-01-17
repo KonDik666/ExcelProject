@@ -45,10 +45,10 @@
         <DataGrid Grid.Row="1" x:Name="MainDataGrid" AutoGenerateColumns="False" ColumnWidth="*" IsReadOnly="True"  SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Наименование платежа" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="Наименование платежа" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="Наименование платежа" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="Наименование платежа" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="Наименование платежа" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Количество" Binding="{Binding count}"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding price}"/>
+                <DataGridTextColumn Header="Сумма" Binding="{Binding cost}"/>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Category.name_category}"/>
             </DataGrid.Columns>
         </DataGrid>
 
