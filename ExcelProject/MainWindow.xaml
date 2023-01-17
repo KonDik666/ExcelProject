@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1400">
     <Grid>
-        <Button x:Name="BtnExportToExcel" Click="BtnExportToExcel_Click"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Button x:Name="BtnExportToExcel" Click="BtnExportToExcel_Click" Width="100" Height="50"></Button>
+        </StackPanel>
+        <Frame x:Name="MainFrame" Grid.Row="1">
+            
+        </Frame>
+       
+       
     </Grid>
 </Window>

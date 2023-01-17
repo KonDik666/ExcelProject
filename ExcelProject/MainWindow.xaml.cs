@@ -1,4 +1,5 @@
 ﻿using ExcelProject.Models;
+using ExcelProject.View.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace ExcelProject
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new MainPage());
         }
 
         private void BtnExportToExcel_Click(object sender, RoutedEventArgs e)
