@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Excel = Microsoft.Office.Interop.Excel;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace ExcelProject
 {
@@ -27,7 +28,7 @@ namespace ExcelProject
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainPage());
+            MainFrame.Navigate(new LoginPage());
         }
 
         private void BtnExportToExcel_Click(object sender, RoutedEventArgs e)
@@ -94,6 +95,87 @@ namespace ExcelProject
             }
             aplication.Visible = true;
 
+        }
+
+        private void BtnExportToWord_Click(object sender, RoutedEventArgs e)
+        {
+            Core db = new Core();
+
+            var allUsers = db.context.Users.ToList();
+            var allCategories = db.context.Category.ToList();
+
+            var application = new Word.Application();
+
+            Word.Document document = application.Documents.Add();
+
+            foreach (var user in allUsers)
+            {
+                Word.Paragraph userParagraph = document.Paragraphs.Add();
+                Word.Range userRange = userParagraph.Range;
+                userRange.Text = user.last_name + " " + user.first_name + " " + user.patronymic_name;
+                userParagraph.set_Style("Заголовок 1");
+                userRange.InsertParagraphAfter();
+
+                Word.Paragraph tableParagraph = document.Paragraphs.Add();
+                Word.Range tableRange = tableParagraph.Range;
+                Word.Table paymentsTable = document.Tables.Add(tableRange, allCategories.Count() + 1, 3);
+                paymentsTable.Borders.InsideLineStyle = paymentsTable.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                paymentsTable.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                Word.Range cellRange;
+
+                cellRange = paymentsTable.Cell(1, 1).Range;
+                cellRange.Text = "Иконка";
+                cellRange = paymentsTable.Cell(1, 2).Range;
+                cellRange.Text = "Категория";
+                cellRange = paymentsTable.Cell(1, 3).Range;
+                cellRange.Text = "Сумма расходов";
+
+                paymentsTable.Rows[1].Range.Bold = 1;
+                paymentsTable.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+                for (int i = 0; i < allCategories.Count; i++)
+                {
+                    var currentCategory = allCategories[i];
+
+                    cellRange = paymentsTable.Cell(i + 2, 1).Range;
+                    //cellRange.Text = Convert.ToString(AppDomain.CurrentDomain.BaseDirectory + "..\\Assets\\Images\\" + currentCategory.icon + ".png");
+                    //Word.InlineShape imageShape = cellRange.InlineShapes.AddPicture(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\Assets\\Images\\" + currentCategory.icon + ".png");
+                    //imageShape.Width = imageShape.Height = 40;
+                    cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+                    cellRange = paymentsTable.Cell(i + 2, 2).Range;
+                    cellRange.Text = currentCategory.name_category;
+
+                    cellRange = paymentsTable.Cell(i + 2, 3).Range;
+                    cellRange.Text = user.Payment.ToList().Where(p => p.Category == currentCategory).Sum(p => p.count * p.price).ToString() + " руб.";
+                }
+
+                Payment maxPayment = user.Payment.OrderByDescending(p => p.price * p.count).FirstOrDefault();
+                if (maxPayment != null)
+                {
+                    Word.Paragraph maxPaymentParagraph = document.Paragraphs.Add();
+                    Word.Range maxPaymentRange = maxPaymentParagraph.Range;
+                    maxPaymentRange.Text = $"Самый дорогостоящий платеж - {maxPayment.name} за {(maxPayment.price * maxPayment.count).ToString()} руб. от {maxPayment.date_payment.ToString()}";
+                    maxPaymentRange.Font.Color = Word.WdColor.wdColorDarkRed;
+                    maxPaymentRange.InsertParagraphAfter();
+                }
+
+                Payment minPayment = user.Payment.OrderBy(p => p.price * p.count).FirstOrDefault();
+                if (minPayment != null)
+                {
+                    Word.Paragraph minPaymentParagraph = document.Paragraphs.Add();
+                    Word.Range minPaymentRange = minPaymentParagraph.Range;
+                    minPaymentRange.Text = $"Самый дешевый платеж - {minPayment.name} за {(minPayment.price * minPayment.count).ToString()} руб. от {minPayment.date_payment.ToString()}";
+                    minPaymentRange.Font.Color = Word.WdColor.wdColorDarkGreen;
+                }
+
+                if (user != allUsers.LastOrDefault())
+                {
+                    document.Words.Last.InsertBreak(Word.WdBreakType.wdPageBreak);
+                }
+            }
+
+            application.Visible = true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcelProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +26,25 @@ namespace ExcelProject.View.Pages
             InitializeComponent();
         }
 
+        public int CorrectLoginPasswordCount(string cLogin, string cPassword)
+        {
+            Core bd = new Core();
+            var allUsers = bd.context.Users.ToList();
+            int countRec = allUsers.Where(x => x.login == cLogin && x.password == cPassword).Count();
+            return countRec;
+        }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            if (CorrectLoginPasswordCount(LoginTextBox.Text, MainPasswordBox.Password) == 1)
+            {
 
+                NavigationService.Navigate(new MainPage());
+
+            }
+            else
+            {
+                MessageBox.Show("Неверные логин и/или пароль.");
+            }
         }
     }
 }

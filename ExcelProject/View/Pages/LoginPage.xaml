@@ -18,12 +18,12 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <TextBlock Text="Имя пользователя" FontSize="30" Width="313"/>
-            <ListView Width="322"></ListView>
+            <TextBox Width="323" x:Name="LoginTextBox"></TextBox>
             
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <TextBlock Text="Пароль" FontSize="30" Width="313"></TextBlock>
-            <PasswordBox Width="322"></PasswordBox>
+            <PasswordBox Width="322" x:Name="MainPasswordBox"></PasswordBox>
         </StackPanel>
         <StackPanel  Orientation="Horizontal" Grid.Row="3">
             <Button Width="142" Margin="0,59,0,47" Content="Войти" x:Name="LoginButton" Click="LoginButton_Click" FontSize="20"></Button>
