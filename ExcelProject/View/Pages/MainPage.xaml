@@ -36,7 +36,7 @@
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <Button Height="52"  Width="106" Margin="20,24" Content="выбрать" FontSize="25"></Button>
                     <Button Height="52"  Width="102" Margin="20,10" Content="очистить" FontSize="25"></Button>
-                    <Button Height="52"  Width="102" Margin="20,24" Content="отчет" FontSize="25"></Button>
+                    <Button Height="52"  Width="102" Margin="20,24" Content="отчет" FontSize="25" x:Name="report_btn" Click="report_btn_Click"></Button>
                 </StackPanel>
                
             </Grid>

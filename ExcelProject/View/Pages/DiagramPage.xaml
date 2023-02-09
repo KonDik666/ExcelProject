@@ -34,12 +34,13 @@ xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;asse
             </StackPanel>
         </StackPanel>
 
-        <WindowsFormsHost>
+        <WindowsFormsHost Grid.Row="1" Margin="5">
             <charts:Chart x:Name="ChartPayments">
-                <charts:Chart.Legend></charts:Chart.Legend>
-                <charts:Legend>
+                <charts:Chart.Legends>
+                    <charts:Legend>
                     
-                </charts:Legend>
+                    </charts:Legend>
+                </charts:Chart.Legends>
             </charts:Chart>
         </WindowsFormsHost>
     </Grid>

@@ -27,5 +27,10 @@ namespace ExcelProject.View.Pages
             InitializeComponent();
             MainDataGrid.ItemsSource = db.context.Payment.ToList();
         }
+
+        private void report_btn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new DiagramPage());
+        }
     }
 }
