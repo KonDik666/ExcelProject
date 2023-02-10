@@ -16,7 +16,7 @@
             <Button x:Name="BtnExportToExcel" Click="BtnExportToExcel_Click" Width="100" Height="50" Content="Excel"></Button>
             <Button x:Name="BtnExportToWord" Click="BtnExportToWord_Click" Width="100" Height="50" Content="Word"></Button>
         </StackPanel>
-        <Frame x:Name="MainFrame" Grid.Row="1">
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden">
             
         </Frame>
        

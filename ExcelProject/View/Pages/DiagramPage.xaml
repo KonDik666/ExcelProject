@@ -20,10 +20,10 @@ xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;asse
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Пользователь:" Width="125" Margin="5" VerticalAlignment="Center" TextAlignment="Right">
+                <TextBlock Text="Пользователь:" Width="125" Margin="5" VerticalAlignment="Center" TextAlignment="Right" >
                     
                 </TextBlock>
-                <ComboBox Name="ComboUsers" SelectionChanged="UpdateChart" SelectedIndex="0" Width="175" Margin="5" DisplayMemberPath="FIO">
+                <ComboBox Name="ComboUsers" SelectionChanged="UpdateChart" SelectedIndex="0" Width="175" Margin="5" DisplayMemberPath="FIO" >
                     
                 </ComboBox>
                 <TextBlock Text="Тип диаграммы" Width="125" Margin="5" VerticalAlignment="Center" TextAlignment="Right"></TextBlock>

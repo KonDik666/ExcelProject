@@ -32,5 +32,10 @@ namespace ExcelProject.View.Pages
         {
             NavigationService.Navigate(new DiagramPage());
         }
+
+        private void button_add_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PayAddPage());
+        }
     }
 }

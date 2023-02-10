@@ -27,11 +27,16 @@ namespace ExcelProject.View.Pages
         {
             InitializeComponent();
             Core bd = new Core();
+            List<Users> user;
             ChartPayments.ChartAreas.Add(new ChartArea("Main"));
             var currentSeries = new Series("Payments") { IsValueShownAsLabel = true };
             ChartPayments.Series.Add(currentSeries);
             ComboUsers.ItemsSource = bd.context.Users.ToList();
             ComboChartTypes.ItemsSource = Enum.GetValues(typeof(SeriesChartType));
+            //var userName =  bd.context.Users.ToList();
+            //user = bd.context.Users.ToList();
+            //ComboUsers.ItemsSource = user.Select(x => x.first_name).ToArray();
+
         }
 
         private void BtnExportToExcel_Click(object sender, RoutedEventArgs e)
@@ -51,6 +56,11 @@ namespace ExcelProject.View.Pages
                     currentSeries.Points.AddXY(category.name_category, bd.context.Payment.ToList().Where(p => p.Users.id_user == currentUser.id_user && p.Category == category).Sum(p=>p.price*p.cost));
                 }
             }
+        }
+
+        private void UpdateChart(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

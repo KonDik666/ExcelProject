@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="0*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Horizontal">
-                    <Button Height="52" Width="50" Content="+" FontSize="25"></Button>
+                    <Button Height="52" Width="50" Content="+" FontSize="25" x:Name="button_add" Click="button_add_Click"></Button>
                     <Button Height="52"  Width="50" Margin="20" Content="-" FontSize="25"></Button>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal">

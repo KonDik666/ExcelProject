@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcelProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,29 @@ namespace ExcelProject.View.Pages
     /// </summary>
     public partial class PayAddPage : Page
     {
+        Core bd = new Core();
+        List<Category> cat;
         public PayAddPage()
         {
             InitializeComponent();
+            cat = bd.context.Category.ToList();
+            
+            CategoryComboBox.ItemsSource = cat.Select(x => x.name_category).ToArray();
+
         }
+
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+
+            {
+                Payment payments = new Payment()
+                {
+                    name = PayNameTextBlock.Text,
+                    count = Convert.ToInt32(CountTextBlock.Text),
+                    
+                }
+};
+            }
     }
 }
